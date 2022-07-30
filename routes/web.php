@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +14,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', [PageController::class, 'renderApp'])->name('app');
-
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::get('/dashboard', [PageController::class, 'renderDashboard'])->name('dashboard');
+    Route::get('/dashboard', [PageController::class, 'redirectToApp'])->name('dashboard');
+    Route::get('/', [PageController::class, 'renderApp'])->name('app');
 });
